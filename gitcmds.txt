@@ -1,0 +1,7 @@
+Clone repo:		git clone siteadress
+Switch branch:		git checkout branchname
+Create branch:		git branch branchname
+Add changes:		git add filename
+Prepare changes:	git commit -m "message"
+Push changes:		git push origin branch
+Shot commit history:	git log
