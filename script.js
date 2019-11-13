@@ -6,9 +6,13 @@ $(document).ready(new function() {                  // similar to int main()
     out = document.getElementById("out");
 
     //out.innerHTML = "testing";
-    $("#submitbutton").click(function() {
+    
+});
+
+$(document).on('keypress', function(e) {
+    if(e.which == 13) {
         checkZip();
-    })
+    }
 });
 
 function checkZip() {
