@@ -31,7 +31,7 @@ function getLocation(){
         success: function(json) {
 
         // output the "capital" object inside "location"
-        //console.log(json);
+        console.log(json);
                     
         city = json.city;
                     
