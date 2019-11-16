@@ -1,6 +1,6 @@
 var inputtext;
 var out;
-var city = 'test';
+var city = '';
 var ip = 'check';
 var access_key = '145a6e1f8118cacc7daf96e2b3f5ab42';
 
@@ -14,6 +14,8 @@ $(document).ready(new function() {                  // similar to int main()
 $(document).on('keypress', function(e) {            // checks when enter key is pressed in text box
     if(e.which == 13) {
         inputtext = document.getElementById("inputtext").value;
+
+        city = inputtext;
         
         outputInputTest();
     }
@@ -21,7 +23,7 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
 
 function outputInputTest() {                        // outputs to site
     inputtext = document.getElementById("inputtext").value;
-    out.innerHTML = inputtext;
+    out.innerHTML = city;
 }
 
 function getLocation(){
