@@ -2,6 +2,7 @@ var inputtext;
 var out;
 var city = '';
 var ip = 'check';
+var eventW;
 var access_key = '145a6e1f8118cacc7daf96e2b3f5ab42';
 var date = '';
 var enddate = '';
@@ -9,12 +10,13 @@ var enddate = '';
 
 
 $(document).ready(new function() {                  // similar to int main()
-    //eventWidget();
+    eventWidget();
     getLocation();
     getDate();
     out = document.getElementById("out");
+    eventW = document.getElementById("eventwidget");
     //city = "Houston";
-    //getEvents();
+    getEvents();
 });
 
 $(document).on('keypress', function(e) {            // checks when enter key is pressed in text box
@@ -51,7 +53,27 @@ function getLocation(){
     });
 }
 
+function eventWidget() {
+    
+    document.getElementById("eventwidget").innerHTML = '<div w-type="event-discovery" w-tmapikey="pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listviewthumbnails" w-colorscheme="light" w-width="401" w-height="600" w-size="10" w-border="2" w-borderradius="4" w-radius="25" w-period="day" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="xxl" w-titlelink="off" w-sorting="groupByName" w-id="id_i80o9o" w-source="" w-branding="TicketWeb" w-countrycode="US" w-postalcode="" w-city="Houston" w-latlong=""></div>';
+}
 
+function getEvents() {
+    $.ajax({
+        type:"GET",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        async:true,
+        dataType: "json",
+        success: function(json) {
+                    console.log(json);
+                    // Parse the response.
+                    // Do other things.
+                 },
+        error: function(xhr, status, err) {
+                    // This time, we do not end up here!
+                 }
+      });
+}
 
 function getDate() {
     var today = new Date();
