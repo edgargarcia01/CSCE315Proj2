@@ -10,12 +10,12 @@ var enddate = '';
 
 
 $(document).ready(new function() {                  // similar to int main()
-    //eventWidget();
+    eventWidget();
     getLocation();
     getDate();
     out = document.getElementById("out");
     eventW = document.getElementById("eventwidget");
-    city = "Houston";
+    //city = "Houston";
     getEvents();
 });
 
