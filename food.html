@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
   </head>
   <body>
@@ -34,7 +35,83 @@
           <h2 class="textbox">
             <input type="text" id = "inputtext">
             <h1>City: <span id="out"></span></h1>
+            <input type="submit">
       </section>
+
+
+      <section class="results">
+        <div class="result-card">
+            <div class="result-header">
+                    <img src="https://b.zmtcdn.com/data/pictures/6/17324066/64db295e6cec17dac243785ed9ed3805_featured_v2.jpg?fit=around%7C200%3A200&amp"
+                    alt="restaurant-photo" class="result-thumbnail" align="left" border="5">
+                <h2 class="result-title" style="color:rgb(180, 21, 21);">Blue Baker</h2>
+                <h3 class="result-location result-neighborhood" style="color:black;">College Station</h3>
+                <h3 class="result-location result-address" style="color:black;">201 Domik Drive 77840</h3>
+                <p class="result-price">Price: $</p>
+                <!-- <p>${cuisine type}</p> -->
+            </div>
+
+            <div class="result-footer">
+                <button class="result-footer-button" onclick="alert('(979) 696-5055')">Call</button>
+                <button class="result-footer-button" onclick=" window.open('https://www.bluebaker.com/','_blank')">Visit Website</button>
+            </div>
+        </div>
+
+        <div class="result-card">
+                <div class="result-header">
+                        <img src="https://b.zmtcdn.com/data/pictures/0/17324450/e72d94bfe5e1621d182d0618c2c7e11a_featured_v2.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A&quot"
+                        alt="restaurant-photo" class="result-thumbnail" align="left" border="5">
+                    <h2 class="result-title" style="color:rgb(180, 21, 21);">Fuego Tortilla Grill</h2>
+                    <h3 class="result-location result-neighborhood" style="color:black;">College Station</h3>
+                    <h3 class="result-location result-address" style="color:black;">108 Poplar Street 77840</h3>
+                    <p class="result-price">Price: $</p>
+                    <!-- <p>${cuisine type}</p> -->
+                </div>
+    
+                <div class="result-footer">
+                    <button class="result-footer-button" onclick="alert('(979) 703-1804')">Call</button>
+                    <button class="result-footer-button" onclick=" window.open('https://www.fuegotortillagrill.com/','_blank')">Visit Website</button>
+                </div>
+            </div>
+
+            <div class="result-card">
+                    <div class="result-header">
+                            <img src="https://b.zmtcdn.com/data/pictures/8/17324158/229dd729032b920987fbda4063e1a24b_featured_v2.jpg?fit=around%7C200%3A200&amp;crop=200%3A200%3B%2A%2C%2A&quot"
+                            alt="restaurant-photo" class="result-thumbnail" align="left" border="5">
+                        <h2 class="result-title" style="color:rgb(180, 21, 21);">Layne's Chicken Fingers</h2>
+                        <h3 class="result-location result-neighborhood" style="color:black;">College Station</h3>
+                        <h3 class="result-location result-address" style="color:black;">106 Walton Dr, College Station 77840</h3>
+                        <p class="result-price">Price: $</p>
+                        <!-- <p>${cuisine type}</p> -->
+                    </div>
+        
+                    <div class="result-footer">
+                        <button class="result-footer-button" onclick="alert('(979) 696-7633')">Call</button>
+                        <button class="result-footer-button" onclick=" window.open('http://www.layneschickenfingers.com/','_blank')">Visit Website</button>
+                    </div>
+                </div>
+        <template>
+            <div class="result-card">
+                <div class="result-header">
+                    <h2 class="result-title">${title}</h2>
+                    <h3 class="result-location result-neighborhood">${neighborhood}</h3>
+                    <h3 class="result-location result-address">${address}</h3>
+                    <p class="result-price">${price}</p>
+                    <!-- <p>${cuisine type}</p> -->
+                </div>
+                <div class="result-body">
+                    <img src="" alt="restaurant-photo" class="result-thumbnail">
+                </div>
+                <div class="result-footer">
+                    <button class="result-footer-button">Call</button>
+                    <button class="result-footer-button"><a href="" target="_blank" class="result-website">Visit
+                            Website</a></button>
+                </div>
+            </div>
+        </template>
+
+        <script src="index.js"></script>
+    </section>
 
       <section class="main-content">
           
