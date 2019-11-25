@@ -9,11 +9,11 @@ var enddate = '';
 
 
 $(document).ready(new function() {                  // similar to int main()
-    //eventWidget();
+    eventWidget();
     getLocation();
     getDate();
     eventW = document.getElementById("eventwidget");
-    getEvents();
+    //getEvents();
 });
 
 $(document).on('keypress', function(e) {            // checks when enter key is pressed in text box

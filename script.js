@@ -9,6 +9,7 @@ var enddate = '';
 
 $(document).ready(new function() {                  // similar to int main()
     //eventWidget();
+    alert("Make sure to disable any adblockers and allow for unsafe scripts on your browser.");
     getLocation();
     getDate();
     //getEvents();
