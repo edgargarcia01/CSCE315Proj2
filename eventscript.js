@@ -10,10 +10,12 @@ var enddate = '';
 
 $(document).ready(new function() {                  // similar to int main()
     
-    eventWidget();
+    //eventWidget();
     getLocation();
     getDate();
-    eventW = document.getElementById("eventwidget");
+    //eventW = document.getElementById("eventwidget");
+    outputEvents();
+
 });
 
 $(document).on('keypress', function(e) {            // checks when enter key is pressed in text box
@@ -22,6 +24,7 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
 
         city = inputtext;
         outputCity();
+        getEvents();
     }
 });
 
@@ -44,6 +47,7 @@ function getLocation(){
 
         //eventWidget();
         outputCity();
+        getEvents();
         }
     });
 }
@@ -68,6 +72,10 @@ function getEvents() {
                     // This time, we do not end up here!
                  }
       });
+}
+
+function outputEvents() {
+    document.getElementById("boxes").innerHTML = '<h1>EventName</h1> <h2> location </h2> <h2> date and time </h2> <h3> Information </h3>';
 }
 
 function getDate() {
