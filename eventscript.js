@@ -1,5 +1,4 @@
 var inputtext;
-var out;
 var city = '';
 var ip = 'check';
 var eventW;
@@ -10,12 +9,10 @@ var enddate = '';
 
 
 $(document).ready(new function() {                  // similar to int main()
-    eventWidget();
+    //eventWidget();
     getLocation();
     getDate();
-    out = document.getElementById("out");
     eventW = document.getElementById("eventwidget");
-    //city = "Houston";
     getEvents();
 });
 
@@ -24,14 +21,12 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
         inputtext = document.getElementById("inputtext").value;
 
         city = inputtext;
-        
-        outputInputTest();
+        outputCity();
     }
 });
 
-function outputInputTest() {                        // outputs to site
-    inputtext = document.getElementById("inputtext").value;
-    out.innerHTML = city;
+function outputCity() {
+    document.getElementById("inputtext").value = city;
 }
 
 function getLocation(){
@@ -47,8 +42,8 @@ function getLocation(){
                     
         $(".city").append(city);
 
-        out.innerHTML = city;
         //eventWidget();
+        outputCity();
         }
     });
 }

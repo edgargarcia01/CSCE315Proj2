@@ -1,5 +1,4 @@
 var inputtext;
-var out;
 var city = '';
 var ip = 'check';
 var access_key = '145a6e1f8118cacc7daf96e2b3f5ab42';
@@ -12,8 +11,6 @@ $(document).ready(new function() {                  // similar to int main()
     //eventWidget();
     getLocation();
     getDate();
-    out = document.getElementById("out");
-    //city = "Houston";
     //getEvents();
 });
 
@@ -22,15 +19,10 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
         inputtext = document.getElementById("inputtext").value;
 
         city = inputtext;
-        
-        outputInputTest();
+        outputCity();
     }
 });
 
-function outputInputTest() {                        // outputs to site
-    inputtext = document.getElementById("inputtext").value;
-    out.innerHTML = city;
-}
 
 function getLocation(){
     $.ajax({
@@ -45,13 +37,15 @@ function getLocation(){
                     
         $(".city").append(city);
 
-        out.innerHTML = city;
         //eventWidget();
+        outputCity();
         }
     });
 }
 
-
+function outputCity() {
+    document.getElementById("inputtext").value = city;
+}
 
 function getDate() {
     var today = new Date();
