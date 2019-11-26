@@ -12,7 +12,7 @@ var box = '<div class="eventbox">';
 
 $(document).ready(new function() {                  // similar to int main()
 
-    //getLocation();
+    getLocation();
     getDate();
 });
 
@@ -58,7 +58,7 @@ function getEvents() {
     $.ajax({
         type:"GET",
         //url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
-        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + "Houston" + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
         async:true,
         dataType: "json",
         success: function(json) {
