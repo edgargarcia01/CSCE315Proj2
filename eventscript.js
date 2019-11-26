@@ -80,3 +80,14 @@ function getDate() {
     enddate = (new Date(latertoday)).toISOString().slice(0, 19).replace("'T'", " ");
     //document.getElementById("eventwidget").innerHTML = enddate ;
 }
+
+function colorBlindFunction() {
+    if (document.getElementById("sheetoption").innerHTML == '<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">')
+    {
+        document.getElementById("sheetoption").innerHTML = '<link rel="stylesheet" type="text/css" href="stylesheets/stylesheetcb.css" media="screen">';
+    }
+    else
+    {
+        document.getElementById("sheetoption").innerHTML = '<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">';
+    }
+  }
