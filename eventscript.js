@@ -63,10 +63,7 @@ function getLocation(){
     });
 }
 
-function eventWidget() {
-    
-    //document.getElementById("eventwidget").innerHTML = '<div w-type="event-discovery" w-tmapikey="pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz" w-googleapikey="YOUR_GOOGLE_API_KEY" w-keyword="" w-theme="listviewthumbnails" w-colorscheme="light" w-width="401" w-height="600" w-size="10" w-border="2" w-borderradius="4" w-radius="25" w-period="day" w-layout="vertical" w-attractionid="" w-promoterid="" w-venueid="" w-affiliateid="" w-segmentid="" w-proportion="xxl" w-titlelink="off" w-sorting="groupByName" w-id="id_i80o9o" w-source="" w-branding="TicketWeb" w-countrycode="US" w-postalcode="" w-city="Houston" w-latlong=""></div>';
-}
+
 
 function getEvents() {
     $.ajax({
