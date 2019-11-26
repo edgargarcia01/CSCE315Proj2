@@ -7,6 +7,13 @@ var date = '';
 var enddate = '';
 var boxlist = '';
 var box = '<div class="eventbox">';
+var evennumber;
+var eventnames = [];
+var eventdates = [];
+var eventtimes = [];
+var eventvenues = [];
+var eventticketlinks = [];
+
 
 
 
@@ -21,6 +28,13 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
         inputtext = document.getElementById("inputtext").value;
 
         city = inputtext;
+
+        eventnames = [];
+        eventdates = [];
+        eventtimes = [];
+        eventvenues = [];
+        eventticketlinks = [];
+
         //outputCity();
         getEvents();
     }
@@ -63,8 +77,19 @@ function getEvents() {
         dataType: "json",
         success: function(json) {
                     console.log(json);
-                    // Parse the response.
-                    // Do other things.
+                    //console.log(json._embedded.events);
+                    eventnumber = json._embedded.events.length;
+                    
+                    var i;
+                    for (i = 0; i < eventnumber; i++) {
+                        eventnames.push(json._embedded.events[i].name);
+                        eventdates.push(json._embedded.events[i].dates.start.localDate);
+                        eventtimes.push(json._embedded.events[i].dates.start.localTime);
+                        eventvenues.push(json._embedded.events[i]._embedded.venues[0].name);
+                        eventticketlinks.push(json._embedded.events[i].url);
+                    }
+
+
                     outputEvents();
                  },
         error: function(xhr, status, err) {
@@ -76,8 +101,8 @@ function getEvents() {
 function outputEvents() {
     boxlist = '';
     var i;
-    for (i = 0; i < 10; i++) {
-        boxlist = boxlist + box + '<h3>' + 'event' + i + '</h3><div>' + city +  '</div></div>';
+    for (i = 0; i < eventnumber; i++) {
+        boxlist = boxlist + box + '<h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] +  '</div><div>' + eventtimes[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></div>';
     }
     //document.getElementById("boxes").innerHTML = '<div class="eventbox"><h3> Event name </h3><div>Location</div> <div> date and time </div> <div> Information </div></div>';
     document.getElementById("boxes").innerHTML = boxlist;
