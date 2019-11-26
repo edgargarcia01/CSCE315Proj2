@@ -5,17 +5,15 @@ var eventW;
 var access_key = '145a6e1f8118cacc7daf96e2b3f5ab42';
 var date = '';
 var enddate = '';
+var boxlist = '';
+var box = '<div class="eventbox">';
 
 
 
 $(document).ready(new function() {                  // similar to int main()
-    
-    //eventWidget();
-    getLocation();
-    getDate();
-    //eventW = document.getElementById("eventwidget");
-    outputEvents();
 
+    //getLocation();
+    getDate();
 });
 
 $(document).on('keypress', function(e) {            // checks when enter key is pressed in text box
@@ -23,7 +21,7 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
         inputtext = document.getElementById("inputtext").value;
 
         city = inputtext;
-        outputCity();
+        //outputCity();
         getEvents();
     }
 });
@@ -45,7 +43,6 @@ function getLocation(){
                     
         $(".city").append(city);
 
-        //eventWidget();
         outputCity();
         getEvents();
         }
@@ -60,13 +57,15 @@ function eventWidget() {
 function getEvents() {
     $.ajax({
         type:"GET",
-        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        //url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + "Houston" + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
         async:true,
         dataType: "json",
         success: function(json) {
                     console.log(json);
                     // Parse the response.
                     // Do other things.
+                    outputEvents();
                  },
         error: function(xhr, status, err) {
                     // This time, we do not end up here!
@@ -75,7 +74,13 @@ function getEvents() {
 }
 
 function outputEvents() {
-    document.getElementById("boxes").innerHTML = '<h1>EventName</h1> <h2> location </h2> <h2> date and time </h2> <h3> Information </h3>';
+    boxlist = '';
+    var i;
+    for (i = 0; i < 10; i++) {
+        boxlist = boxlist + box + '<h3>' + 'event' + i + '</h3><div>' + city +  '</div></div>';
+    }
+    //document.getElementById("boxes").innerHTML = '<div class="eventbox"><h3> Event name </h3><div>Location</div> <div> date and time </div> <div> Information </div></div>';
+    document.getElementById("boxes").innerHTML = boxlist;
 }
 
 function getDate() {
