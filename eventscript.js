@@ -174,7 +174,6 @@ function colorBlindFunction() {
     var end;
 
 
-
     num = timestring.substr(0,2);
 
 
