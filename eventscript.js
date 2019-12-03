@@ -29,11 +29,18 @@ $(document).on('keypress', function(e) {            // checks when enter key is 
 
         city = inputtext;
 
-        eventnames = [];
-        eventdates = [];
-        eventtimes = [];
-        eventvenues = [];
-        eventticketlinks = [];
+        city = city.charAt(0).toUpperCase() + city.substr(1);
+
+        for (i = 0; i < city.length; i++)
+        {
+            if (city.charAt(i) == ' ' && i < city.length - 2)
+            {
+                city = city.substr(0,i+1) + city.charAt(i+1).toUpperCase() + city.substr(i+2);
+            }
+        }
+
+        document.getElementById("inputtext").value = city;
+
 
         //outputCity();
         getEvents();
@@ -69,25 +76,34 @@ function getEvents() {
     $.ajax({
         type:"GET",
         //url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
-        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
         async:true,
         dataType: "json",
         success: function(json) {
                     console.log(json);
                     //console.log(json._embedded.events);
-                    eventnumber = json._embedded.events.length;
-                    
-                    var i;
-                    for (i = 0; i < eventnumber; i++) {
-                        eventnames.push(json._embedded.events[i].name);
-                        eventdates.push(json._embedded.events[i].dates.start.localDate);
-                        eventtimes.push(json._embedded.events[i].dates.start.localTime);
-                        eventvenues.push(json._embedded.events[i]._embedded.venues[0].name);
-                        eventticketlinks.push(json._embedded.events[i].url);
+
+                    if (json.page.totalElements > 0) {
+
+                        eventnumber = json._embedded.events.length;
+                        
+                        var i;
+                        for (i = 0; i < eventnumber; i++) {
+                            eventnames.push(json._embedded.events[i].name);
+                            eventdates.push(json._embedded.events[i].dates.start.localDate);
+                            eventtimes.push(json._embedded.events[i].dates.start.localTime);
+                            eventvenues.push(json._embedded.events[i]._embedded.venues[0].name);
+                            eventticketlinks.push(json._embedded.events[i].url);
+                        }
+
+
+                        outputEvents();
                     }
-
-
-                    outputEvents();
+                    else
+                    {
+                        eventnumber = 0;
+                        outputEvents();
+                    }
                  },
         error: function(xhr, status, err) {
                     // This time, we do not end up here!
@@ -96,20 +112,44 @@ function getEvents() {
 }
 
 function outputEvents() {
+
     boxlist = '';
     var i;
     for (i = 0; i < eventnumber; i++) {
-        boxlist = boxlist + box + '<h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] +  '</div><div>' + eventtimes[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></div>';
+
+        if (eventtimes[i] == null) {
+            eventtimes[i] = 'No Time Provided';
+        }
+        else {
+            eventtimes[i] = timeAdjuster(eventtimes[i]);
+        }
+
+        boxlist = boxlist + box + '<h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] + ', ' + city + '</div><div>' + eventtimes[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></div>';
     }
     //document.getElementById("boxes").innerHTML = '<div class="eventbox"><h3> Event name </h3><div>Location</div> <div> date and time </div> <div> Information </div></div>';
+
+    if (eventnumber == 0)
+    {
+        boxlist = boxlist + box + '<h3>No Events Around You Listed For Today</h3></div>';
+    }
+
+    boxlist = boxlist + box + '<h3>Data Provided By <a href=https://www.ticketmaster.com>TicketMaster</a></h3></div>';
+
     document.getElementById("boxes").innerHTML = boxlist;
+
+    boxlist = '';
+    eventnames = [];
+    eventdates = [];
+    eventtimes = [];
+    eventvenues = [];
+    eventticketlinks = [];
 }
 
 function getDate() {
     var today = new Date();
     today.setHours(today.getHours() - 6);
     var latertoday = new Date(today);
-    latertoday.setHours(latertoday.getHours() + 12);
+    latertoday.setHours(latertoday.getHours() + 18);
     date = (new Date(today)).toISOString().slice(0, 19).replace("'T'", " ");
     //date = (new Date(today)).toISOString().slice(0, 10).replace("'T'", " ")+"T20:00:00";
     enddate = (new Date(latertoday)).toISOString().slice(0, 19).replace("'T'", " ");
@@ -125,4 +165,38 @@ function colorBlindFunction() {
     {
         document.getElementById("sheetoption").innerHTML = '<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">';
     }
+  }
+
+  function timeAdjuster(timestring) {
+
+    var res;
+    var num;
+    var end;
+
+
+
+    num = timestring.substr(0,2);
+
+
+    if (num >= 12)
+    {
+        end = " PM";
+    }
+    else
+    {
+        end = " AM";
+    }
+
+    if (num > 12)
+    {
+        res = (num - 12) + timestring.substr(2,3);
+    }
+    else
+    {
+        res = timestring.substr(0,5);
+    }
+
+    res = res + end;
+
+    return res;
   }
