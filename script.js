@@ -24,6 +24,13 @@ $(document).ready(new function() {                  // similar to int main()
         colorBlindFunction();
     }
 
+
+    if (localStorage.getItem("popup") === null)
+    {
+        localStorage.setItem("popup",0);
+        alert("To use the site as intended, please disable adblockers and load unsafe scripts");
+    }
+
     //getEvents();
 });
 
