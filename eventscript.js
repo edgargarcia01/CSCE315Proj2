@@ -69,7 +69,7 @@ function getEvents() {
     $.ajax({
         type:"GET",
         //url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
-        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=10&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=20&city=" + city + "&radius=20&unit=miles&includeTBA=no&includeTBD=no&startDateTime=" + date + "Z&endDateTime=" + enddate +"Z&sort=date,name,desc&apikey=jAgPHe9zhnVREzoNhSvYNrfX1V9zeecJ",
         async:true,
         dataType: "json",
         success: function(json) {
@@ -99,6 +99,11 @@ function outputEvents() {
     boxlist = '';
     var i;
     for (i = 0; i < eventnumber; i++) {
+
+        if (eventtimes[i] == null) {
+            eventtimes[i] = 'No Time Provided';
+        }
+
         boxlist = boxlist + box + '<h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] +  '</div><div>' + eventtimes[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></div>';
     }
     //document.getElementById("boxes").innerHTML = '<div class="eventbox"><h3> Event name </h3><div>Location</div> <div> date and time </div> <div> Information </div></div>';
@@ -109,7 +114,7 @@ function getDate() {
     var today = new Date();
     today.setHours(today.getHours() - 6);
     var latertoday = new Date(today);
-    latertoday.setHours(latertoday.getHours() + 12);
+    latertoday.setHours(latertoday.getHours() + 18);
     date = (new Date(today)).toISOString().slice(0, 19).replace("'T'", " ");
     //date = (new Date(today)).toISOString().slice(0, 10).replace("'T'", " ")+"T20:00:00";
     enddate = (new Date(latertoday)).toISOString().slice(0, 19).replace("'T'", " ");
