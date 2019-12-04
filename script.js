@@ -246,5 +246,4 @@ function getDate() {
       for (i = 0; i < eventnumber; i++) {
           eventdates[i] = eventdates[i].substr(5,2) + '/' + eventdates[i].substr(8,2);
       }
-      console.log(eventdates);
   }

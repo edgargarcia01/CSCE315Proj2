@@ -24,11 +24,12 @@ header {
         clear: both;
     }
 
-.logo {
-    float: left;
-    padding: 10px 0;
-    color: #fff;
-}
+  .logo {
+      width: 140px;
+      float: left;
+      padding: 10px 0;
+      color: #fff;
+  }
 
 nav {
     float: right;
