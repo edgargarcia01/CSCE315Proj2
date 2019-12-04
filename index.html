@@ -9,13 +9,14 @@
     <div id="sheetoption"><link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen"></div>
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
 
       <header>
           <div class="container">
               <h3 class="logo">Logo</h3>
-
               <nav>
                   <ul>
                       <li class="current"><a href="index.html">Home</a></li>
@@ -26,7 +27,7 @@
               </nav>
           </div>
       </header>
-
+      <form action="">
       <section class="page-header">
           <!--<h1 class="project-name">Project Title</h1>-->
           <!--<h2 class="project-tagline"></h2>
@@ -34,13 +35,41 @@
           <h2 class="textbox">
             <input type="text" id = "inputtext" placeholder = "City" value = "">
       </section>
-
+    </form>
       <section class="main-content">
 
         <div class="eventlist" id="boxes">
         </div></div>
 
-        <div class="foodlist" id="boxes2">          
+        <div class="foodlist" id="boxes2"> 
+            <section id="restaurant-results">
+              </section>
+          
+              <template>
+                  <div class="result-card">
+                      <div class="result-header">
+                          <img src="" alt="restaurant-photo" class="result-thumbnail"  align="left" border="5">
+                          <p class="result-title" style="font-weight: bolder;padding-bottom: 0px;">${title}</p>
+                          <p class="result-location result-neighborhood" style="color:black;padding-bottom: 0px;">${neighborhood}</p>
+                          <p class="result-location result-address" style="color:black;padding-bottom: 0px;">${address}</p>
+                          <p class="result-price">${price}</p>
+                          <p class="result-number" style="color:black;padding-bottom: 0px;">${Phone number}</p>
+                          <div class="result-rating">0
+                                  <span class="result-rating-text">Tooltip text</span>
+                          </div>
+                          <p class = "result-timings" style="color:black;padding-bottom: 0px;">${timings}</p>
+                          <!-- <p>${cuisine type}</p> -->
+                      </div>
+                      
+                          
+                      
+                      <div class="result-footer">
+                          <button class="result-footer-button">Visit Website</button>
+                      </div>
+                  </div>
+              </template>
+          
+              <script src="index.js"></script>   
         </div>
 
           

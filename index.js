@@ -5,30 +5,52 @@ const resultArea = document.querySelector('#restaurant-results');
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
   resultArea.innerHTML = '';
-  const query = e.target.querySelector('#city-name').value;
+  var query = e.target.querySelector('#inputtext').value;
+
+  const res1 = await fetch('https://developers.zomato.com/api/v2.1/cities?q=' + query, {
+    headers: {
+      "user-key": "fc305fe00d927c65c5e98f32fc535b7b",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    method: 'POST'
+  })
+  const cityResponse = await res1.json();
+  
+  if(cityResponse.location_suggestions == ''){
+    alert('Error: City not in database.');
+    return
+  }else{
+    var searchCity = "entity_id=" + cityResponse.location_suggestions[0].id  +"&entity_type=city";// + query;
+  }
   if (query === '') {
     return
   }
-  e.target.querySelector('#city-name').value = '';
-  const res = await fetch('/search', {
+  const res = await fetch('https://developers.zomato.com/api/v2.1/search?' + searchCity, {
     headers: {
+      "user-key": "fc305fe00d927c65c5e98f32fc535b7b",
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    method: 'POST', body: `q=${query}`
+    method: 'POST'
   })
   const json = await res.json();
+  
   populateData(json.restaurants);
 });
 
 function populateData(results) {
+  
   results.forEach(result => {
+    console.log(result);
     const newResult = rTemp.content.cloneNode(true);
-    newResult.querySelector('.result-title').innerText = result.name;
-    newResult.querySelector('.result-neighborhood').innerText = result.location.locality;
-    newResult.querySelector('.result-address').innerText = result.location.address;
-    newResult.querySelector('.result-price').innerText = '$'.repeat(result.price);
-    newResult.querySelector('.result-thumbnail').src = result.thumbnail;
-    newResult.querySelector('.result-website').href = result.url;
+    newResult.querySelector('.result-title').innerText = result.restaurant.name;
+    newResult.querySelector('.result-neighborhood').innerText = result.restaurant.location.locality;
+    newResult.querySelector('.result-address').innerText = result.restaurant.location.address;
+    newResult.querySelector('.result-price').innerText = '$'.repeat(result.restaurant.price_range);
+    newResult.querySelector('.result-thumbnail').src = result.restaurant.thumb;
+    //newResult.querySelector('.result-website').onclick = "window.open('" + result.restaurant.url + "','_blank')";
+    newResult.querySelector('.result-number').innerText = result.restaurant.phone_numbers;
+    newResult.querySelector('.result-rating').innerText = result.restaurant.user_rating.aggregate_rating;
+    newResult.querySelector('.result-timings').innerText = result.restaurant.timings;
     resultArea.appendChild(newResult);
   });
 }
