@@ -86,7 +86,7 @@ input[type='submit']:focus {
 
 
 .result-header {
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   border-bottom: 1px solid lightgrey;
 }
 
@@ -101,6 +101,7 @@ input[type='submit']:focus {
   color: black;
   text-align: left;
   padding-bottom: 0px;
+  padding-right: 50px;
 }
 
 .result-location {
@@ -147,9 +148,8 @@ input[type='submit']:focus {
   margin: 0 10px;
 }
 
-.results p{
-  font-weight: lighter;
-  padding-bottom: 0px;
+.result-card h4{
+     padding-left: 14px;
 }
 
 .result-rating{
@@ -202,4 +202,8 @@ input[type='submit']:focus {
 .result-rating:hover .result-rating-text {
   visibility: visible;
   opacity: 1;
+}
+
+.result-card p1{
+  padding-bottom: 1px;
 }
