@@ -145,9 +145,9 @@ a {
 }
 
 .foodlist {
-  background-color: rgb(56, 56, 56);
+  background-color: rgb(255, 255, 255);
   border: none;
-  padding-right: 20rem;
+  padding-right: 0rem;
   width: 45rem;
   height: 40rem;
   overflow-y: scroll;
