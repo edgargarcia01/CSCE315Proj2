@@ -40,7 +40,7 @@ searchForm.addEventListener('submit', async e => {
 function populateData(results) {
   
   results.forEach(result => {
-    console.log(result);
+    //console.log(result);
     const newResult = rTemp.content.cloneNode(true);
     newResult.querySelector('.result-title').innerText = result.restaurant.name;
     newResult.querySelector('.result-neighborhood').innerText = result.restaurant.location.locality;
