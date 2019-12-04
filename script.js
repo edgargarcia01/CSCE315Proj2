@@ -14,6 +14,7 @@ var eventdates = [];
 var eventtimes = [];
 var eventvenues = [];
 var eventticketlinks = [];
+var eventpics = [];
 
 
 
@@ -140,8 +141,11 @@ function colorBlindFunction() {
                             eventtimes.push(json._embedded.events[i].dates.start.localTime);
                             eventvenues.push(json._embedded.events[i]._embedded.venues[0].name);
                             eventticketlinks.push(json._embedded.events[i].url);
+                            eventpics.push(json._embedded.events[i].images[1].url);
                         }
 
+                        //console.log(eventdates);
+                        dateAdjuster();
 
                         outputEvents();
                     }
@@ -170,7 +174,7 @@ function outputEvents() {
             eventtimes[i] = timeAdjuster(eventtimes[i]);
         }
 
-        boxlist = boxlist + box + '<h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] + ', ' + city + '</div><div>' + eventtimes[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></div>';
+        boxlist = boxlist + box + '<img src=' + eventpics[i] + ' width="150"><section class="eventtext"><h3>' + eventnames[i] + '</h3><div>' + eventvenues[i] + ', ' + city + '</div><div>' + eventtimes[i] + '  ' + eventdates[i] + '</div><a href=' + eventticketlinks[i] +'>Tickets</a></section></div>';
     }
     //document.getElementById("boxes").innerHTML = '<div class="eventbox"><h3> Event name </h3><div>Location</div> <div> date and time </div> <div> Information </div></div>';
 
@@ -189,6 +193,7 @@ function outputEvents() {
     eventtimes = [];
     eventvenues = [];
     eventticketlinks = [];
+    eventpics = [];
 }
 
 function getDate() {
@@ -234,4 +239,11 @@ function getDate() {
     res = res + end;
 
     return res;
+  }
+
+  function dateAdjuster() {
+      for (i = 0; i < eventnumber; i++) {
+          eventdates[i] = eventdates[i].substr(5,2) + '/' + eventdates[i].substr(8,2);
+      }
+      console.log(eventdates);
   }
