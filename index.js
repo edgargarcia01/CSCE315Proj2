@@ -2,6 +2,8 @@ const searchForm = document.querySelector('form');
 const rTemp = document.querySelector('template');
 const resultArea = document.querySelector('#restaurant-results');
 
+
+
 searchForm.addEventListener('submit', async e => {
   e.preventDefault();
   resultArea.innerHTML = '';

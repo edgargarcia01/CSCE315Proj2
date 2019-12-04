@@ -18,6 +18,7 @@ var eventpics = [];
 
 
 
+
 $(document).ready(new function() {                  // similar to int main()
 
     getLocation();
