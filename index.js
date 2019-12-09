@@ -52,7 +52,7 @@ function populateData(results) {
     newResult.getElementById('result-button').setAttribute( "onClick", "window.open('" + result.restaurant.url + "','_blank')");
     newResult.querySelector('.result-number').innerText = "Phone Number: " + result.restaurant.phone_numbers;
     newResult.querySelector('.result-rating').innerText = result.restaurant.user_rating.aggregate_rating;
-    newResult.getElementById("result-rating").style.backgroundColor = result.restaurant.user_rating.rating_color;
+    //newResult.getElementById("result-rating").style.backgroundColor = result.restaurant.user_rating.rating_color;
     newResult.querySelector('.result-timings').innerText = "Hours: " + result.restaurant.timings;
    //resultFooter.innerHTML = '<button class="result-footer-button">Visit Website</button>';
     resultArea.appendChild(newResult);
